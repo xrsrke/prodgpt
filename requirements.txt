@@ -1,3 +1,5 @@
-mlflow
+accelerate
+datasets
+metaflow
 prefect
-awscli
+transformers
