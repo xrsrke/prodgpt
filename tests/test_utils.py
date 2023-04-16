@@ -1,6 +1,6 @@
 import os
 
-from ..progpt.utils import download_data_to_local
+from prodgpt.utils import download_data_to_local
 
 
 def test_download_data_to_local():
