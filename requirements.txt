@@ -1,5 +1,7 @@
 accelerate
 datasets
+google-cloud
+google-cloud-storage
 metaflow
 torch
 torchmetrics
