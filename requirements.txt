@@ -2,5 +2,6 @@ accelerate
 datasets
 metaflow
 torch
+torchmetrics
 transformers
 wandb

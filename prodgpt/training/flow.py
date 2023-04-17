@@ -3,7 +3,8 @@ from accelerate import Accelerator
 from metaflow import FlowSpec, Parameter, step
 from torch import optim
 
-from .utils import load_model, load_tokenized_dataset, load_tokenizer
+from prodgpt.training.utils import (load_model, load_tokenized_dataset,
+                                    load_tokenizer)
 
 
 class SuperviseFinetuningFlow(FlowSpec):
@@ -46,3 +47,7 @@ class SuperviseFinetuningFlow(FlowSpec):
     @step
     def end(self):
         pass
+
+
+if __name__ == '__main__':
+    SuperviseFinetuningFlow()
