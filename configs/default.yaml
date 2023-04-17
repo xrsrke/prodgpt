@@ -1,0 +1,2 @@
+gcloud_storage:
+  bucket_name: "prodgpt"
