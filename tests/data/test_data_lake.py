@@ -74,3 +74,17 @@ def test_upload_retrieve_delete_a_single_file_to_data_lake(config):
     assert data_lake.is_file_exists(dest_path) is False
 
     delete_a_local_file_from_file_path(src_path)
+
+
+def test_download_a_single_file_from_data_lake(config):
+    BUCKET_NAME = config["gcloud_storage"]["bucket_name"]
+
+    data_lake = DataLake(bucket_name=BUCKET_NAME)
+    file_name = TESTING_FILE_PATH.split("/")[-1]
+    dest_path = "./" + file_name
+
+    data_lake.download(TESTING_FILE_PATH, dest_path)
+
+    assert is_local_file_exist(dest_path) is True
+
+    delete_a_local_file_from_file_path(dest_path)
