@@ -15,15 +15,23 @@ class DataLake:
         blob = self.bucket.blob(file_name)
         return blob.exists()
 
-    def upload(self, source_file_name: str, destination_blob_name: str):
+    def upload_single_file(
+        self,
+        source_file_name: str,
+        destination_blob_name: str
+    ):
         blob = self.bucket.blob(destination_blob_name)
         blob.upload_from_filename(source_file_name)
         return blob
 
-    def retrieve(self, file_name: str):
+    def retrieve_single_file(self, file_name: str):
         blob = self.bucket.blob(file_name)
         return blob.download_as_string()
 
+    def delete_single_file(self, file_name: str):
+        blob = self.bucket.blob(file_name)
+        return blob.delete()
+
     def download(self, file_name: str, destination_file_name: str):
         blob = self.bucket.blob(file_name)
-        blob.download_to_filename(destination_file_name)
+        return blob.download_to_filename(destination_file_name)

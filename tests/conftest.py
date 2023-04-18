@@ -6,7 +6,7 @@ from prodgpt.utils import load_yaml
 
 @pytest.fixture
 def config():
-    return load_yaml("./configs/config.yaml")
+    return load_yaml("./configs/default.yaml")
 
 
 @pytest.fixture

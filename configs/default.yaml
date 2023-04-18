@@ -1,2 +1,3 @@
 gcloud_storage:
-  bucket_name: "prodgpt"
+  bucket_name: "prodgpt-data-lake"
+  default_path: "data"
