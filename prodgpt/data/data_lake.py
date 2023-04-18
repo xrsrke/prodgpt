@@ -11,27 +11,27 @@ class DataLake:
         self.bucket_name = bucket_name
         self.bucket = storage_client.bucket(bucket_name)
 
-    def is_file_exists(self, file_name: str):
-        blob = self.bucket.blob(file_name)
+    def is_file_exists(self, path: str) -> bool:
+        blob = self.bucket.blob(path)
         return blob.exists()
 
     def upload_single_file(
         self,
-        source_file_name: str,
-        destination_blob_name: str
+        src_path: str,
+        dest_path: str
     ):
-        blob = self.bucket.blob(destination_blob_name)
-        blob.upload_from_filename(source_file_name)
+        blob = self.bucket.blob(dest_path)
+        blob.upload_from_filename(src_path)
         return blob
 
-    def retrieve_single_file(self, file_name: str):
-        blob = self.bucket.blob(file_name)
+    def retrieve_single_file(self, path: str) -> str:
+        blob = self.bucket.blob(path)
         return blob.download_as_string()
 
-    def delete_single_file(self, file_name: str):
-        blob = self.bucket.blob(file_name)
+    def delete_single_file(self, path: str):
+        blob = self.bucket.blob(path)
         return blob.delete()
 
-    def download(self, file_name: str, destination_file_name: str):
-        blob = self.bucket.blob(file_name)
-        return blob.download_to_filename(destination_file_name)
+    def download(self, src_path: str, dest_path: str):
+        blob = self.bucket.blob(src_path)
+        return blob.download_to_filename(dest_path)

@@ -2,7 +2,8 @@ from typing import Union
 
 from prodgpt.data.data_lake import DataLake
 
-GCLOUD_DEFAULT_PATH = "testing"
+GCLOUD_DEFAULT_PATH = "testing/"
+TESTING_FILE_PATH = "not_delete/persistence.txt"
 
 
 def create_a_random_local_txt_file(content: str) -> Union[str, str]:
@@ -29,22 +30,23 @@ def delete_a_local_file_from_file_path(file_path):
         print(f'Error deleting file "{file_path}": {str(e)}')
 
 
+def is_local_file_exist(file_path):
+    import os
+
+    return os.path.exists(file_path)
+
+
 def test_create_delete_a_random_local_txt_file_then_delete_it():
-    def is_file_exists(file_path):
-        import os
-
-        return os.path.exists(file_path)
-
     FILE_CONTENT = "Persistence is all you need"
     file_path, file_name = create_a_random_local_txt_file(FILE_CONTENT)
 
     assert file_path is not None
     assert file_name is not None
-    assert is_file_exists(file_path) is True
+    assert is_local_file_exist(file_path) is True
 
     delete_a_local_file_from_file_path(file_path)
 
-    assert is_file_exists(file_path) is False
+    assert is_local_file_exist(file_path) is False
 
 
 def test_is_file_exists(config):
@@ -62,11 +64,9 @@ def test_upload_retrieve_delete_a_single_file_to_data_lake(config):
 
     data_lake = DataLake(bucket_name=BUCKET_NAME)
     src_path, file_name = create_a_random_local_txt_file(FILE_CONTENT)
-    dest_path = GCLOUD_DEFAULT_PATH + "/" + file_name
+    dest_path = GCLOUD_DEFAULT_PATH + file_name
 
-    data_lake.upload_single_file(
-        source_file_name=src_path, destination_blob_name=dest_path
-    )
+    data_lake.upload_single_file(src_path, dest_path)
 
     assert data_lake.is_file_exists(dest_path) is True
     assert data_lake.retrieve_single_file(dest_path) == FILE_CONTENT.encode()
