@@ -1,8 +1,12 @@
 accelerate
 datasets
 google-cloud
+google-cloud-bigquery
 google-cloud-storage
 metaflow
+pydantic
+sqlalchemy
+sqlalchemy-bigquery
 torch
 torchmetrics
 transformers

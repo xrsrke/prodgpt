@@ -50,7 +50,7 @@ def test_create_delete_a_random_local_txt_file_then_delete_it():
 
 
 def test_is_file_exists(config):
-    BUCKET_NAME = config["gcloud_storage"]["bucket_name"]
+    BUCKET_NAME = config["gcloud_data_lake"]["bucket_name"]
     FILE_PATH = "not_delete/avatar.png"
 
     data_lake = DataLake(bucket_name=BUCKET_NAME)
@@ -59,7 +59,7 @@ def test_is_file_exists(config):
 
 
 def test_upload_retrieve_delete_a_single_file_to_data_lake(config):
-    BUCKET_NAME = config["gcloud_storage"]["bucket_name"]
+    BUCKET_NAME = config["gcloud_data_lake"]["bucket_name"]
     FILE_CONTENT = "Persistence is all you need"
 
     data_lake = DataLake(bucket_name=BUCKET_NAME)
@@ -77,7 +77,7 @@ def test_upload_retrieve_delete_a_single_file_to_data_lake(config):
 
 
 def test_download_a_single_file_from_data_lake(config):
-    BUCKET_NAME = config["gcloud_storage"]["bucket_name"]
+    BUCKET_NAME = config["gcloud_data_lake"]["bucket_name"]
 
     data_lake = DataLake(bucket_name=BUCKET_NAME)
     file_name = TESTING_FILE_PATH.split("/")[-1]
