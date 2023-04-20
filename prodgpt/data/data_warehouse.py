@@ -11,11 +11,13 @@ Base = declarative_base()
 
 class DataBatch(Base):
     __tablename__ = "training_data_batch"
+
     uuid = Column(String(36), primary_key=True)
 
 
 class TrainingText(Base):
     __tablename__ = "training_text"
+
     uuid = Column(String(36), primary_key=True, default=str(uid.uuid4()))
     # batch_id = Column(String(36), ForeignKey("training_data_batch.uid"))
     text = Column(String(3000000), nullable=False)
@@ -39,6 +41,10 @@ class DataWarehouse:
         engine = create_engine(f"bigquery://{project_id}/{dataset_id}")
 
         self.Session = sessionmaker(bind=engine)
+
+    @property
+    def session(self) -> sessionmaker:
+        return self.Session()
 
     def insert(self, data: List[TrainingText]) -> Optional[bool]:
         session = self.Session()
