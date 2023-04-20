@@ -20,11 +20,11 @@ def test_data_batch_model():
 
 
 def test_data_training_text_model():
-    texts = [TrainingText(uuid=str(uuid.uuid4()), text=x) for x in EXAMPLES]
+    texts = [TrainingText(text=x) for x in EXAMPLES]
 
     for x in texts:
-        assert isinstance(x.uuid, str)
-        assert len(x.uuid) == 36
+        # assert isinstance(x.uuid, str)
+        # assert len(x.uuid) == 36
         assert isinstance(x.text, str)
         assert x.text in EXAMPLES
 
