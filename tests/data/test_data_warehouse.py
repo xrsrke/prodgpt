@@ -31,5 +31,5 @@ def test_add_extract_delete_data_to_data_warehouse(config):
     assert len(extracted_data) == len(uuids)
     assert all([x.uuid in uuids for x in extracted_data])
 
-    output = data_warehouse.delete(uuids)
+    output = data_warehouse.delete_from_uuid(uuids)
     assert output is True

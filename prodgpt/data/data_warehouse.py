@@ -48,7 +48,6 @@ class DataWarehouse:
             return True
         except Exception as e:
             session.rollback()
-            # raise Exception("Failed to insert data into data warehouse")
             raise e
 
     def extract_from_uuid(self, uuids: List[uid.UUID]) -> List[TrainingText]:
@@ -62,7 +61,7 @@ class DataWarehouse:
             session.rollback()
             raise e
 
-    def delete(self, data_ids: List[uid.UUID]) -> Optional[bool]:
+    def delete_from_uuid(self, data_ids: List[uid.UUID]) -> Optional[bool]:
         session = self.Session()
         try:
             session.query(TrainingText).filter(
