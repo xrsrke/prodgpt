@@ -1,6 +1,6 @@
 import uuid
 
-from prodgpt.data.data_warehouse import DataWarehouse, TrainingText
+from prodgpt.data.data_warehouse import DataBatch, DataWarehouse, TrainingText
 
 EXAMPLES = [
     "Persistence is all you need",
@@ -9,7 +9,17 @@ EXAMPLES = [
 ]
 
 
-def test_data_model():
+def test_data_batch_model():
+    UUID = str(uuid.uuid4())
+    NAME = "test"
+
+    batch = DataBatch(uuid=UUID, name=NAME)
+
+    assert batch.uuid == UUID
+    assert batch.name == NAME
+
+
+def test_data_training_text_model():
     texts = [TrainingText(uuid=str(uuid.uuid4()), text=x) for x in EXAMPLES]
 
     for x in texts:

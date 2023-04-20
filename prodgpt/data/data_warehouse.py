@@ -13,6 +13,15 @@ class DataBatch(Base):
     __tablename__ = "training_data_batch"
 
     uuid = Column(String(36), primary_key=True)
+    name = Column(String(200), nullable=False)
+    desc = Column(String(1000), nullable=True)
+    created_at = Column(String, default=datetime.now().isoformat())
+    updated_at = Column(String, default=datetime.now().isoformat())
+    deleted_at = Column(String, nullable=True)
+    is_deleted = Column(Boolean, default=False)
+
+    def __repr__(self) -> str:
+        return f"DataBatch(uuid={self.uuid}, name={self.name}"
 
 
 class TrainingText(Base):
