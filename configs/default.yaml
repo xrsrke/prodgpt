@@ -1,4 +1,9 @@
-gcloud_storage:
+gcloud_data_lake:
   bucket_name: "prodgpt-data-lake"
 
   upload_path: "data"
+
+gcloud_data_warehouse:
+  project_id: "agentml"
+  dataset_id: "training_data"
+  table_id: "training_text"
