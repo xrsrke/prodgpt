@@ -1,4 +1,4 @@
-from typing import Iterable, List
+from typing import Iterable, Tuple
 
 import torch
 from torch.utils.data import Dataset
@@ -27,7 +27,7 @@ class TextDataset(Dataset):
             data.append(x, y)
         self.data = data
 
-    def __getitem__(self, index) -> List[torch.Tensor, torch.Tensor]:
+    def __getitem__(self, index) -> Tuple[torch.Tensor, torch.Tensor]:
         return self.data[index]
 
     def __len__(self) -> int:
