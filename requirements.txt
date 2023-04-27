@@ -1,5 +1,6 @@
 accelerate
 datasets
+dbt-core
 google-cloud
 google-cloud-bigquery
 google-cloud-storage
