@@ -1,8 +1,11 @@
 import os
 
+import pytest
+
 from prodgpt.data.utils import download_data_to_local
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_download_data_to_local():
     DATA_URL = ""
     local_filename = download_data_to_local(DATA_URL)

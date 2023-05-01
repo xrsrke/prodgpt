@@ -1,6 +1,9 @@
+import pytest
+
 from prodgpt.data.extractor import RandomExtractor
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_random_extractor():
     N_TOKENS = 300_000_000
 

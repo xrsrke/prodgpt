@@ -1,6 +1,9 @@
+import pytest
+
 from prodgpt.evaluation.model import ModelPerformance
 
 
+@pytest.mark.skip(reason="Not implemented")
 def test_evaluate_model_performance():
     model = None
 

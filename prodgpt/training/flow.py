@@ -8,12 +8,27 @@ from prodgpt.training.utils import (load_model, load_tokenized_dataset,
 
 
 class SuperviseFinetuningFlow(FlowSpec):
+    # training_output_dir = Parameter(
+    #     name="training_output_dir",
+    #     default="training_output",
+    #     help="Directory to store training output"
+    # )
+    # deepspeed_config = Parameter(
+    #     "config",
+    #     default="ds_config.json",
+    #     help="The path to the deepspeed config file"
+    # )
+    learning_rate = Parameter(
+        "learning_rate",
+        default=1e-4,
+        type=float,
+        help="Learning rate"
+    )
     num_epochs = Parameter(
         'num_epochs',
         default=1, type=int,
         help='Number of epochs to train for'
     )
-    lr = Parameter('lr', default=1e-4, type=float, help='Learning rate')
 
     @step
     def start(self):
@@ -41,6 +56,8 @@ class SuperviseFinetuningFlow(FlowSpec):
                 self.optimizer.zero_grad()
                 self.accelerator.backward(loss)
                 self.optimizer.step()
+
+            self.accelerator.print(f"epoch {epoch}")
 
         self.next(self.end)
 

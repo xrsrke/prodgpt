@@ -1,6 +1,14 @@
+model:
+  path: "distilgpt2"
+
+tokenizer:
+  path: "distilgpt2"
+
+dataset:
+  path: onestop_english
+
 gcloud_data_lake:
   bucket_name: "prodgpt-data-lake"
-
   upload_path: "data"
 
 gcloud_data_warehouse:
