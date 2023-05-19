@@ -9,8 +9,17 @@ def create_dataset(config, tokenizer) -> Dataset:
     dataset = load_dataset(DATASET_PATH)
 
     def tokenize_text(x):
-        return tokenizer(x["text"], padding="max_length", truncation=True)
+        return tokenizer(
+            x["text"],
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt"
+        )
 
-    tokenized_dataset = dataset.map(tokenize_text, batched=True)
-    tokenized_dataset = tokenized_dataset.remove_columns(COL_NAMES_REMOVE)
+    tokenized_dataset = dataset.map(
+        tokenize_text,
+        batched=True,
+        remove_columns=COL_NAMES_REMOVE
+    )
+    # tokenized_dataset = tokenized_dataset.remove_columns(COL_NAMES_REMOVE)
     return tokenized_dataset
