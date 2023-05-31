@@ -1,4 +1,5 @@
 import uuid as uid
+from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import List, Optional
 
@@ -47,7 +48,21 @@ class TrainingText(Base):
         return f"Text(uuid={self.uuid})"
 
 
-class DataWarehouse:
+class BaseDataWarehouse(ABC):
+    @abstractmethod
+    def insert(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def extract_from_uuid(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete_from_uuid(self):
+        raise NotImplementedError
+
+
+class DataWarehouse(BaseDataWarehouse):
     def __init__(self, config) -> None:
         project_id = config["gcloud_data_warehouse"]["project_id"]
         dataset_id = config["gcloud_data_warehouse"]["dataset_id"]

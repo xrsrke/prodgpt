@@ -1,11 +1,11 @@
 from abc import abstractclassmethod
 
-from .data_warehouse import DataWarehouse
+from .data_warehouse import DataWarehouse, DataWarehouseBase
 
 
 class BaseExtractor:
     """Base class for all extractors."""
-    def __init__(self):
+    def __init__(self, data_warehouse: DataWarehouseBase):
         self.data_warehouse = DataWarehouse()
 
     @abstractclassmethod
