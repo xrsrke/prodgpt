@@ -1,7 +1,31 @@
+from abc import ABC, abstractmethod
+
 from google.cloud import storage
 
 
-class DataLake:
+class BaseDataLake(ABC):
+    @abstractmethod
+    def is_file_exists(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def upload_single_file(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def retrieve_single_file(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete_single_file(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def download(self):
+        raise NotImplementedError
+
+
+class DataLake(BaseDataLake):
     def __init__(
         self,
         bucket_name: str
