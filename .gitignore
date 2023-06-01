@@ -132,3 +132,4 @@ drafts/*
 .metaflow/*
 
 *.ipynb
+airflow/logs/*
