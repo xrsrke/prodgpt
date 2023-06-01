@@ -1,34 +1,31 @@
-from fastapi import FastAPI
-from prometheus_client import CollectorRegistry, Gauge
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, status
+from log import send_inference_log_to_mongo
+from schema import InferenceLog
 
 app = FastAPI()
 
 
-class Item(BaseModel):
-    name: str
-    value: float
-
-
-# Create a Gauge metric
-g = Gauge('my_metric', 'Description of my metric', ['name'])
-registry = CollectorRegistry()
+@app.get("/")
+def root():
+    return {"message": "Check out my project: github/xrsrke/prodgpt"}
 
 
 @app.post("/monitoring")
-def update_metrics():
-    # Update the Gauge with the value from the POST request
-    # g.labels(name=item.name).set(item.value)
-    # g.labels(name="hello").set("42")
+def monitoring(request: InferenceLog):
+    try:
+        send_inference_log_to_mongo(request.dict())
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Could not send inference log to MongoDB"
+        )
+    else:
+        return {"message": "Inference log sent to MongoDB"}
 
-    # # Push the metrics to the pushgateway
-    # push_to_gateway('localhost:9091', job='my_job', registry=registry)
 
-    from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
-
-    registry = CollectorRegistry()
-    g = Gauge('job_last_success_unixtime', 'finished', registry=registry)
-    g.set_to_current_time()
-    push_to_gateway('localhost:9091', job='batchA', registry=registry)
-
-    return {"message": "Metrics updated successfully"}
+@app.get("/blog")
+def blog():
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Blog not found"
+    )

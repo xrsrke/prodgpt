@@ -1,3 +1,2 @@
 fastapi
-prometheus_client
 pydantic
