@@ -31,8 +31,6 @@ class DataLake(BaseDataLake):
         bucket_name: str
     ):
         storage_client = storage.Client()
-
-        self.bucket_name = bucket_name
         self.bucket = storage_client.bucket(bucket_name)
 
     def is_file_exists(self, path: str) -> bool:
