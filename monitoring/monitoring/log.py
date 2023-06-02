@@ -5,7 +5,8 @@ from evidently.metric_preset import DataDriftPreset
 from evidently.report import Report
 from pydantic import BaseModel
 from pymongo import MongoClient
-from schema import InferenceLog
+
+from .schema import InferenceLog
 
 MONGO_URL = "mongodb://localhost:27018"
 
@@ -52,23 +53,24 @@ class DistributionDrift:
         collection.insert_one(result)
 
     def compute(self) -> dict:
-        current_data = pd.DataFrame(data=self._extract_current_data())
-        # TODO: retrieve reference data from the current deployed model
-        # reference_data = pd.DataFrame(data=self._extract_reference_data())
-        reference_data = current_data
-
-        report = Report(metrics=[
-            DataDriftPreset()
-        ])
-        report.run(current_data=current_data, reference_data=reference_data)
-        report = report.as_dict()
-
         try:
+            current_data = pd.DataFrame(data=self._extract_current_data())
+            # TODO: retrieve reference data from the current deployed model
+            # reference_data = pd.DataFrame(
+            #     data=self._extract_reference_data()
+            # )
+            reference_data = current_data
+
+            report = Report(metrics=[
+                DataDriftPreset()
+            ])
+            report.run(
+                current_data=current_data,
+                reference_data=reference_data
+            )
+            report = report.as_dict()
             self._send_result_to_mongo(report)
         except Exception:
             raise Exception("Failed to send report to mongo")
         else:
             return report
-
-
-DistributionDrift(window_length=100).compute()

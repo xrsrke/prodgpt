@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, status
 from log import send_inference_log_to_mongo
-from schema import InferenceLog
+
+from .schema import InferenceLog
 
 app = FastAPI()
 
