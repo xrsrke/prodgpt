@@ -1,4 +1,4 @@
-from xprodgpt.tokenizer import create_tokenizer
+from prodgpt.tokenizer import create_tokenizer
 
 
 def test_create_tokenizer(config):

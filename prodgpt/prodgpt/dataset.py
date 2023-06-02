@@ -1,12 +1,15 @@
 from datasets import load_dataset
 from torch.utils.data import Dataset
+from transformers import PretrainedTokenizerBase
 
 
-def create_dataset(config, tokenizer) -> Dataset:
-    DATASET_PATH = config["dataset"]["path"]
+def create_dataset(
+    data_path: str,
+    tokenizer: PretrainedTokenizerBase
+) -> Dataset:
     COL_NAMES_REMOVE = ["text", "label"]
 
-    dataset = load_dataset(DATASET_PATH)
+    dataset = load_dataset(data_path)
 
     def tokenize_text(x):
         return tokenizer(
