@@ -51,8 +51,9 @@ class DistributionDrift:
         collection = self.database.get_collection(self.REPORT_COLLECTION_NAME)
         collection.insert_one(result)
 
-    def compute(self):
+    def compute(self) -> dict:
         current_data = pd.DataFrame(data=self._extract_current_data())
+        # TODO: retrieve reference data from the current deployed model
         # reference_data = pd.DataFrame(data=self._extract_reference_data())
         reference_data = current_data
 
@@ -62,7 +63,12 @@ class DistributionDrift:
         report.run(current_data=current_data, reference_data=reference_data)
         report = report.as_dict()
 
-        self._send_result_to_mongo(report)
+        try:
+            self._send_result_to_mongo(report)
+        except Exception:
+            raise Exception("Failed to send report to mongo")
+        else:
+            return report
 
 
 DistributionDrift(window_length=100).compute()
