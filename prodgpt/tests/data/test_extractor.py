@@ -1,6 +1,5 @@
 import pytest
-
-from prodgpt.data.extractor import RandomExtractor
+from xprodgpt.data.extractor import RandomExtractor
 
 
 @pytest.mark.skip(reason="Not implemented")

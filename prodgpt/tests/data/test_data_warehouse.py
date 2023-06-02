@@ -1,6 +1,6 @@
 import uuid
 
-from prodgpt.data.data_warehouse import DataBatch, DataWarehouse, TrainingText
+from xprodgpt.data.data_warehouse import DataBatch, DataWarehouse, TrainingText
 
 EXAMPLES = [
     "Persistence is all you need",

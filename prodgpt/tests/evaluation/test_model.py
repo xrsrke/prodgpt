@@ -1,6 +1,5 @@
 import pytest
-
-from prodgpt.evaluation.model import ModelPerformance
+from xprodgpt.evaluation.model import ModelPerformance
 
 
 @pytest.mark.skip(reason="Not implemented")

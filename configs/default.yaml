@@ -15,3 +15,10 @@ gcloud_data_warehouse:
   project_id: "agentml"
   dataset_id: "training_data"
   table_id: "training_text"
+
+
+monitoring:
+  inference:
+    url: "http://localhost:8000/monitoring/inference"
+  mongodb:
+    url: "mongodb://localhost:27018"

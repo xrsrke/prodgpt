@@ -1,6 +1,6 @@
 from typing import Union
 
-from prodgpt.data.data_lake import DataLake
+from xprodgpt.data.data_lake import DataLake
 
 GCLOUD_DEFAULT_PATH = "testing/"
 TESTING_FILE_PATH = "not_delete/persistence.txt"
