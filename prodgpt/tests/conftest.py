@@ -1,8 +1,7 @@
 import pytest
 from transformers import AutoModel
-
-from prodgpt.tokenizer import create_tokenizer
-from prodgpt.utils import load_yaml
+from xprodgpt.tokenizer import create_tokenizer
+from xprodgpt.utils import load_yaml
 
 
 @pytest.fixture

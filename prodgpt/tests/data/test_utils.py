@@ -1,8 +1,7 @@
 import os
 
 import pytest
-
-from prodgpt.data.utils import download_data_to_local
+from xprodgpt.data.utils import download_data_to_local
 
 
 @pytest.mark.skip(reason="Not implemented")

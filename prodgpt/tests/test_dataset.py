@@ -1,4 +1,4 @@
-from prodgpt.dataset import create_dataset
+from xprodgpt.dataset import create_dataset
 
 
 def test_create_dataset(config, tokenizer):

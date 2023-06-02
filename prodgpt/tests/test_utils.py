@@ -1,4 +1,4 @@
-from prodgpt.utils import load_yaml
+from xprodgpt.utils import load_yaml
 
 
 def test_load_yaml():
