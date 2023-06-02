@@ -23,15 +23,22 @@ class TextData(BaseModel):
 
 
 class DistributionDrift:
+    DB_NAME = 'monitoring'
+    REPORT_COLLECTION_NAME = 'report'
+    INFERENCE_COLLECTION_NAME = "inference_logs"
+
     def __init__(self, window_length: int):
+        client = MongoClient(MONGO_URL)
+
         self.window_length = window_length
+        self.database = client.get_database(self.DB_NAME)
 
     def _extract_current_data(self) -> List[TextData]:
         EXCLUDE_COLUMNS = {"_id": 0, "model_id": 0, "user_id": 0}
 
-        client = MongoClient(MONGO_URL)
-        database = client.get_database('monitoring')
-        collection = database.get_collection('inference_logs')
+        collection = self.database.get_collection(
+            self.INFERENCE_COLLECTION_NAME
+        )
         results = collection.find({}, EXCLUDE_COLUMNS)\
                             .sort('timestamp', -1)\
                             .limit(self.window_length)
@@ -41,9 +48,7 @@ class DistributionDrift:
         pass
 
     def _send_result_to_mongo(self, result: dict):
-        client = MongoClient(MONGO_URL)
-        database = client.get_database('monitoring')
-        collection = database.get_collection('report')
+        collection = self.database.get_collection(self.REPORT_COLLECTION_NAME)
         collection.insert_one(result)
 
     def compute(self):

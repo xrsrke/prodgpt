@@ -1,6 +1,5 @@
-from logging import send_inference_log_to_mongo
-
 from fastapi import FastAPI, HTTPException, status
+from log import send_inference_log_to_mongo
 from schema import InferenceLog
 
 app = FastAPI()
@@ -8,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Check out my project: github/xrsrke/prodgpt"}
+    return {"message": "Check out my project: https://github.com/xrsrke"}
 
 
 @app.post("/monitoring/inference")

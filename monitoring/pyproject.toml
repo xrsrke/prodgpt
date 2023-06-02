@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "monitoring"
+version = "0.1.0"
+description = ""
+authors = ["xrsrke <xariusdrake@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core", "evidently", "fastapi", "mongo", "pandas", "pydantic"]
+build-backend = "poetry.core.masonry.api"

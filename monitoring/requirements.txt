@@ -1,5 +1,0 @@
-evidently
-fastapi
-mongo
-pandas
-pydantic
