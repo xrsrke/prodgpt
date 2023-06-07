@@ -28,10 +28,17 @@ with DAG(
         bash_command=f"mv {LOCAL_DATA}/* {DATALAKE_REPO}/{FOLDER_NAME}",
     )
 
+    install_dvc = BashOperator(
+        task_id="install_dvc",
+        bash_command="pip install dvc",
+    )
+
     add_to_dvc = BashOperator(
         task_id="add_to_dvc",
-        bash_command=f"cd {DATALAKE_REPO} && dvc add .",
+        bash_command=f"cd {DATALAKE_REPO} && dvc add {FOLDER_NAME} && \
+            dvc config core.autostage true",
     )
+
     push_to_dvc = BashOperator(
         task_id="push_to_dvc",
         bash_command=f"cd {DATALAKE_REPO} && dvc push",
@@ -43,5 +50,6 @@ with DAG(
             git commit -m 'Add data' && git push",
     )
 
-    create_new_folder_for_new_data >> move_data_to_repo >> add_to_dvc
+    create_new_folder_for_new_data >> move_data_to_repo >> install_dvc
+    install_dvc >> add_to_dvc
     add_to_dvc >> push_to_dvc >> add_and_push_to_git
