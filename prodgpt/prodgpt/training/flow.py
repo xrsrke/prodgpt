@@ -2,8 +2,9 @@ import torch.nn.functional as F
 from accelerate import Accelerator
 from metaflow import FlowSpec, Parameter, step
 from torch import optim
-from xprodgpt.training.utils import (load_model, load_tokenized_dataset,
-                                     load_tokenizer)
+
+from prodgpt.training.utils import (load_model, load_tokenized_dataset,
+                                    load_tokenizer)
 
 
 class SuperviseFinetuningFlow(FlowSpec):

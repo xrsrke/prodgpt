@@ -21,7 +21,8 @@ google-cloud-storage=">=2.9.0"
 metaflow=">=2.9.3"
 pydantic=">=1.10.8"
 sqlalchemy=">=2.0.15"
-sqlalchemy-bigquery=">=0.0.7"
+sqlalchemy-bigquery="*"
+zstandard = "^0.21.0"
 
 [build-system]
 requires = ["poetry-core"]

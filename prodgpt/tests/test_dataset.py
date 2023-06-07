@@ -1,10 +1,14 @@
-from xprodgpt.dataset import create_dataset
+from prodgpt.dataset import create_dataset
 
 
 def test_create_dataset(config, tokenizer):
     EXPECTED_COLS = ["attention_mask", "input_ids"]
+    DATA_PATH = config["dataset"]["path"]
 
-    dataset = create_dataset(config, tokenizer)
+    dataset = create_dataset(
+        data_path=DATA_PATH,
+        tokenizer=tokenizer
+    )
 
     assert "train" in dataset.keys()
     assert len(dataset["train"]) > 0
