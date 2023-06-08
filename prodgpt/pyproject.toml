@@ -6,7 +6,7 @@ authors = ["xrsrke <xariusdrake@hotmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.10"
 torch=">=2.0.1"
 torchmetrics=">=0.11.4"
 transformers=">=4.29.2"
@@ -23,6 +23,7 @@ pydantic=">=1.10.8"
 sqlalchemy=">=2.0.15"
 sqlalchemy-bigquery="*"
 zstandard = "^0.21.0"
+
 
 [build-system]
 requires = ["poetry-core"]
